@@ -1,24 +1,31 @@
 #! /usr/bin/python
-
+import os
+import sys
 import yaml
 import subprocess
-import sys
-import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 
 def run_commands(commands, directory):
-    command_str = ' && '.join(commands)
-    process = subprocess.Popen(command_str, shell=True, cwd=directory, executable="/bin/bash")
+    command_str = " && ".join(commands)
+    process = subprocess.Popen(
+        command_str, shell=True, cwd=directory, executable="/bin/bash"
+    )
     process.wait()
 
+
 def main(action, name, directory):
-    with open('repositories.yaml', 'r') as file:
+    repositories = os.path.join(script_dir, "repositories.yaml")
+    with open(repositories, "r") as file:
         config = yaml.safe_load(file)
 
     for item in config:
-        if name == 'all' or item['name'] == name:
+        if name == "all" or item["name"] == name:
             if action in item:
                 print(f"Running {action} for {item['name']}...")
                 run_commands(item[action], directory)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
