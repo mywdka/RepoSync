@@ -13,11 +13,22 @@
   install:
     - git clone https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI RVC-WebUI
     - cd RVC-WebUI
-    - python3 -m venv venv
-    - source ./venv/bin/activate
+    - python3 -m venv .venv # rvc uses .venv folder
+    - source ./.venv/bin/activate
     - pip install torch torchvision torchaudio
     - pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
     - pip install -r requirements.txt
   update:
     - cd RVC-WebUI
+    - git pull
+- name: StyleGAN2-ada
+  install:
+    - git clone https://github.com/NVlabs/stylegan2-ada-pytorch.git StyleGAN2-ada
+    - cd StyleGAN2-ada
+    - python3 -m venv venv
+    - source ./venv/bin/activate
+    - pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+    - pip install click requests tqdm pyspng ninja imageio-ffmpeg==0.4.3
+  update:
+    - cd StyleGAN2-ada
     - git pull
