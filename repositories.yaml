@@ -21,6 +21,15 @@
   update:
     - cd RVC-WebUI
     - git pull
+- name: stable-diffusion-webui
+  install:
+    - wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh
+    - chmod +x ./webui.sh
+    - ./webui.sh
+    - rm ./webui.sh
+  update:
+    - cd stable-diffusion-webui
+    - git pull
 - name: StyleGAN2-ada
   install:
     - git clone https://github.com/NVlabs/stylegan2-ada-pytorch.git StyleGAN2-ada
