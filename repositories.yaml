@@ -41,3 +41,14 @@
   update:
     - cd StyleGAN2-ada
     - git pull
+- name: UVR
+  install:
+    - git clone https://github.com/Anjok07/ultimatevocalremovergui.git UVR
+    - cd UVR
+    - python3 -m venv venv
+    - source ./venv/bin/activate
+    - grep -v "Dora" requirements.txt > temp.txt && mv temp.txt requirements.txt # fix for deprecated sklearn
+    - pip install -r requirements.txt
+  update:
+    - cd UVR
+    - git pull
